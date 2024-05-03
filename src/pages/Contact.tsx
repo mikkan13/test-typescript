@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { ChangeEventHandler, FormEventHandler, useState } from "react";
 
 
 
@@ -12,7 +12,7 @@ function Contact() {
   const [emailErrorMessage, setEmailErrorMessage] = useState("")
   const [messageErrorMessage, setMessageErrorMessage] = useState("")
 
-  const onSubmit = (e:React.ChangeEvent<HTMLInputElement>) => {
+  const onSubmit: FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault()
     setNameErrorMessage("")
     setEmailErrorMessage("")
@@ -49,7 +49,7 @@ function Contact() {
           "Content-Type": "application/json",
         },
         // body: JSON.stringify(data)
-        body: JSON.stringify(name, email, message)
+        body: JSON.stringify({ name, email, message })
       })
       .then((response) => response.json())
       .then((result) => alert("送信しました"))
@@ -69,7 +69,7 @@ function Contact() {
   const onChangeEmail = (e:React.ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value)
   }
-  const onChangeMessage = (e:React.ChangeEvent<HTMLInputElement>) => {
+  const onChangeMessage: ChangeEventHandler<HTMLTextAreaElement> = (e) => {
     setMessage(e.target.value)
   }
 
@@ -126,8 +126,8 @@ function Contact() {
             <textarea
               name="message"
               id="message"
-              cols="30"
-              rows="8"
+              cols={30}
+              rows={8}
               className="w-full p-4 border border-gray-300 rounded-lg"
               value={message}
               onChange={onChangeMessage}
