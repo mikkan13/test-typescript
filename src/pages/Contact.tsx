@@ -18,12 +18,6 @@ function Contact() {
     setEmailErrorMessage("")
     setMessageErrorMessage("")
 
-    const formData = {
-      name,
-      email,
-      message
-    }
-
     const emptyName = name === ""
     const insufficientNameLength = message.length > 30
     const emptyEmail = email === ""
@@ -58,7 +52,6 @@ function Contact() {
         setName("")
         setEmail("")
         setMessage("")
-        console.log(formData)
       })
     }
   }
